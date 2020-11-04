@@ -1,0 +1,13 @@
+apiVersion: security.istio.io/v1beta1
+kind: AuthorizationPolicy
+metadata:
+  name: gestaoclientes-authorization-create-messages
+spec:
+  selector:
+    matchLabels:
+      app: gestaoclientes
+      version: v2
+  rules:
+    - to:
+        - operation:
+            paths: [ "/gestaoclientes/messages/create/*", "/gestaoclientes/messages/read" ]

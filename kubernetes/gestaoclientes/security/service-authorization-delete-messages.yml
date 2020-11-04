@@ -1,0 +1,16 @@
+apiVersion: security.istio.io/v1beta1
+kind: AuthorizationPolicy
+metadata:
+  name: gestaoclientes-authorization-delete
+spec:
+  selector:
+    matchLabels:
+      app: gestaoclientes
+      version: v2
+  rules:
+    - to:
+        - operation:
+            paths: [ "/gestaoclientes/messages/delete/*" ]
+      when:
+        - key: request.auth.claims[scope]
+          values: [ "delete:messages" ]

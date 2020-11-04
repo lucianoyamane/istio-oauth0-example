@@ -1,0 +1,19 @@
+apiVersion: authentication.istio.io/v1alpha1
+kind: Policy
+metadata:
+  name: gestaoclientes-jwt
+spec:
+  targets:
+    - name: gestaoclientes
+  peers:
+    - mtls: {}
+  origins:
+    - jwt:
+        issuer: "https://dev-7ulnaa82.us.auth0.com/"
+        audiences:
+          - "https://api.gestaoclientes.com/"
+        jwksUri: "https://dev-7ulnaa82.us.auth0.com/.well-known/jwks.json"
+        trigger_rules:
+          - excluded_paths:
+              - exact: /gestaoclientes/messages/read
+  principalBinding: USE_ORIGIN

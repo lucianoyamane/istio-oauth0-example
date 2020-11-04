@@ -1,0 +1,28 @@
+
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: gestaoclientes-v2
+  labels:
+    app: gestaoclientes
+    version: v2
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: gestaoclientes
+      version: v2
+  template:
+    metadata:
+      labels:
+        app: gestaoclientes
+        version: v2
+    spec:
+      serviceAccountName: oauth0-gestao-clientes
+      containers:
+        - name: gestaoclientes
+          image: docker.io/lyamane/gestaoclientes:v2
+          imagePullPolicy: IfNotPresent
+          ports:
+            - containerPort: 3200
+---

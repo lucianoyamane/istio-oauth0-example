@@ -1,0 +1,21 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: gestaoclientes
+  labels:
+    app: gestaoclientes
+    service: gestaoclientes
+spec:
+  ports:
+    - port: 3200
+      name: http
+  selector:
+    app: gestaoclientes
+---
+apiVersion: v1
+kind: ServiceAccount
+metadata:
+  name: oauth0-gestao-clientes
+  labels:
+    account: gestaoclientes
+---
